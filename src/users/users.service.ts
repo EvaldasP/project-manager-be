@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { createUserDto } from './dto/create-user.dto';
 import { User } from './users.model';
-
+import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UsersService {
   constructor(@InjectModel('user') private readonly userModel: Model<User>) {}
@@ -15,14 +15,19 @@ export class UsersService {
       throw new ConflictException('Username already exists');
     }
 
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(password, salt);
+
     const newUser = new this.userModel({
       username,
-      password,
+      password: hashedPassword,
     });
     await newUser.save();
   }
 
   private async getUser(username: string): Promise<User> {
+    console.log(username);
+
     const user = await this.userModel.findOne({ username });
     return user;
   }
