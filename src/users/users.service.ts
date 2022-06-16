@@ -9,7 +9,7 @@ export class UsersService {
   constructor(@InjectModel('user') private readonly userModel: Model<User>) {}
 
   async insertUser(createUserDto: AuthCredentialsDto): Promise<void> {
-    let { username, password } = createUserDto;
+    let { username, password, role } = createUserDto;
 
     if (await this.getUser(username)) {
       throw new ConflictException('Username already exists');
@@ -18,16 +18,15 @@ export class UsersService {
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const newUser = new this.userModel({
+    const newUser: User = new this.userModel({
       username,
       password: hashedPassword,
+      role,
     });
     await newUser.save();
   }
 
   async getUser(username: string): Promise<User> {
-    console.log(username);
-
     const user = await this.userModel.findOne({ username });
     return user;
   }

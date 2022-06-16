@@ -1,4 +1,5 @@
-import { IsString, MinLength } from 'class-validator';
+import { IsEnum, IsString, MinLength } from 'class-validator';
+import { Roles } from '../users.model';
 
 export class AuthCredentialsDto {
   @IsString()
@@ -7,4 +8,7 @@ export class AuthCredentialsDto {
   @IsString()
   @MinLength(8)
   password: string;
+
+  @IsEnum(Roles)
+  role: Roles;
 }
