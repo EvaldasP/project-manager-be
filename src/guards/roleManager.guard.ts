@@ -14,7 +14,7 @@ export class roleManagerGuard implements CanActivate {
   ): boolean | Promise<boolean> | Observable<boolean> {
     const req = context.switchToHttp().getRequest();
 
-    if (req.user.role !== Roles.ProjectManager) {
+    if (req.user.role === Roles.ProjectManager) {
       return true;
     } else {
       throw new UnauthorizedException();
