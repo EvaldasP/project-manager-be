@@ -1,14 +1,14 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { AuthCredentialsDto } from './dto/create-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './users.model';
 import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UsersService {
   constructor(@InjectModel('user') private readonly userModel: Model<User>) {}
 
-  async insertUser(createUserDto: AuthCredentialsDto): Promise<void> {
+  async insertUser(createUserDto: CreateUserDto): Promise<void> {
     let { username, password, role } = createUserDto;
 
     if (await this.getUser(username)) {
