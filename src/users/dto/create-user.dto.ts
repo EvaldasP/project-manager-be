@@ -1,5 +1,5 @@
 import { IsEnum, IsString, MinLength } from 'class-validator';
-import { Roles } from '../users.model';
+import { Roles } from '../user.schema';
 
 export class CreateUserDto {
   @IsString()
