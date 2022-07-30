@@ -20,9 +20,4 @@ export class AuthController {
   ): Promise<{ accessToken: string }> {
     return this.authService.signIn(createUserDto);
   }
-
-  @Get('/test')
-  Test(@GetUser() user: any) {
-    console.log(user);
-  }
 }
