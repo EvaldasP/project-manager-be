@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { Roles } from 'src/schemas/user.schema';
+import { Roles } from '../../schemas/user.schema';
 
 @Injectable()
 export class SuperAdminGuard implements CanActivate {
