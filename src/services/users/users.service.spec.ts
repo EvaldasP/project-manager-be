@@ -3,7 +3,7 @@ import { UsersService } from './users.service';
 import { getModelToken } from '@nestjs/mongoose';
 import { mockUser } from '../../mocks/shared/user.mock';
 import { Model } from 'mongoose';
-import { Roles, User } from './user.schema';
+import { Roles, User } from '../../schemas/user.schema';
 
 describe('UsersService', () => {
   let service: UsersService;
