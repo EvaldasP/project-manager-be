@@ -34,7 +34,7 @@ describe('UsersService', () => {
     expect(service).toBeDefined();
   });
 
-  it('should insert a new user', async () => {
+  it('should insert a new user and return true', async () => {
     jest.spyOn(model, 'create').mockImplementationOnce(() =>
       Promise.resolve({
         username: 'Test',
@@ -43,13 +43,9 @@ describe('UsersService', () => {
       }),
     );
 
-    const newUser = await service.insertUser({
-      username: 'Test',
-      password: 'PasswordTest123',
-      role: Roles.Employee,
-    });
+    const newUser = await service.insertUser(mockUser);
 
-    expect(newUser).toEqual(mockUser);
+    expect(newUser).toEqual(true);
   });
 
   it('should return user', async () => {
