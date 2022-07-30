@@ -10,4 +10,4 @@ import { ProjectService } from './project.service';
   ],
   exports: [ProjectService],
 })
-export class PorjectModule {}
+export class ProjectModule {}
