@@ -1,9 +1,7 @@
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
-import { sign } from 'crypto';
-import { createUserDtoMock } from '../mocks/dto/create-user.dto.mock';
-import { UsersServiceMock } from '../mocks/services/users.service.mock';
-import { Roles } from '../users/user.schema';
+import { createUserDtoMock } from '../../mocks/dto/create-user.dto.mock';
+import { UsersServiceMock } from '../../mocks/services/users.service.mock';
 import { UsersService } from '../users/users.service';
 import { AuthService } from './auth.service';
 

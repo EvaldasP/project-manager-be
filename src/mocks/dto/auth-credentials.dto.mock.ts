@@ -1,4 +1,4 @@
-import { AuthCredentialsDto } from '../../auth/dto/auth-credentials.dto';
+import { AuthCredentialsDto } from '../../services/auth/dto/auth-credentials.dto';
 
 export const authCredentialsDtoMock: AuthCredentialsDto = {
   username: 'Test',

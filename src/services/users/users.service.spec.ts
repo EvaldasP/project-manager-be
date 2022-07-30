@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from './users.service';
 import { getModelToken } from '@nestjs/mongoose';
-import { mockUser } from '../mocks/shared/user.mock';
+import { mockUser } from '../../mocks/shared/user.mock';
 import { Model } from 'mongoose';
 import { Roles, User } from './user.schema';
 
