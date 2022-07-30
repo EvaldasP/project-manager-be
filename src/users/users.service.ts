@@ -10,7 +10,7 @@ export class UsersService {
     @InjectModel(User.name) private readonly userModel: Model<UserDocument>,
   ) {}
 
-  async insertUser(createUserDto: CreateUserDto): Promise<User> {
+  async insertUser(createUserDto: CreateUserDto): Promise<boolean> {
     let { username, password, role } = createUserDto;
 
     if (await this.getUser(username)) {
@@ -26,7 +26,7 @@ export class UsersService {
       role,
     });
 
-    return newUser;
+    return !!newUser;
   }
 
   async getUser(username: string): Promise<User> {

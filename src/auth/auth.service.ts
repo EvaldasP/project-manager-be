@@ -6,6 +6,7 @@ import { UsersService } from '../users/users.service';
 import { JwtPayload } from './dto/jwt-payload.interface';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { CreateUserDto } from '../users/create-user.dto';
+import { User } from '../schemas/user.schema';
 @Injectable()
 export class AuthService {
   constructor(
@@ -13,8 +14,8 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signUp(createUserDto: CreateUserDto): Promise<void> {
-    this.usersService.insertUser(createUserDto);
+  signUp(createUserDto: CreateUserDto): Promise<boolean> {
+    return this.usersService.insertUser(createUserDto);
   }
 
   async signIn(
