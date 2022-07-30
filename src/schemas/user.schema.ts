@@ -49,6 +49,7 @@ export class User {
 }
 
 export enum Roles {
+  SuperAdmin = 'Super Admin',
   Employee = 'Employee',
   ProjectManager = 'Project Manager',
 }
