@@ -9,8 +9,8 @@ export class Project {
   @Prop({ required: true })
   name: string;
 
-  @Prop({ required: false, type: mongoose.Schema.Types.ObjectId, ref: 'User' })
-  projectManager: User;
+  @Prop({ type: Object })
+  projectManager: Pick<User, '_id' | 'username'>;
 
   @Prop({
     required: true,

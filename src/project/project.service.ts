@@ -24,11 +24,18 @@ export class ProjectService {
       projectManagerId,
     );
 
+    console.log(foundProjectManager);
+
     const createdProject = new this.projectModel({
       ...createProjectDto,
       tasks: [],
       workers: [],
-      projectManager: foundProjectManager || null,
+      projectManager: foundProjectManager
+        ? {
+            _id: foundProjectManager._id,
+            username: foundProjectManager.username,
+          }
+        : null,
     });
 
     return createdProject.save();
