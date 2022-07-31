@@ -5,7 +5,7 @@ export class CreateProjectDto {
   @IsString()
   @Length(1)
   readonly name: string;
-  readonly projectManager: User;
+  readonly projectManagerId: string;
   readonly workers: User[];
   readonly tasks: [];
 }
