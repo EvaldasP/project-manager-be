@@ -13,12 +13,12 @@ export class Project {
   projectManager: User;
 
   @Prop({
-    required: false,
+    required: true,
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   })
   workers: User[];
 
-  @Prop([])
+  @Prop({ required: true, type: [] })
   tasks: [];
 }
 
