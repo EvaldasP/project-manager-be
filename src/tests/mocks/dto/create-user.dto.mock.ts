@@ -1,5 +1,5 @@
-import { Roles } from '../../users/user.schema';
-import { CreateUserDto } from '../../users/create-user.dto';
+import { CreateUserDto } from '../../../users/create-user.dto';
+import { Roles } from '../../../users/user.schema';
 
 export const createUserDtoMock: CreateUserDto = {
   username: 'Test',

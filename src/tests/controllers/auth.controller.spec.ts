@@ -3,7 +3,7 @@ import { AuthService } from '../../auth/auth.service';
 import { authCredentialsDtoMock } from '../../mocks/dto/auth-credentials.dto.mock';
 import { createUserDtoMock } from '../../mocks/dto/create-user.dto.mock';
 import { AuthServiceMock } from '../../mocks/services/auth.service.mock';
-import { AuthController } from './auth.controller';
+import { AuthController } from '../../auth/auth.controller';
 
 describe('AuthController', () => {
   let controller: AuthController;
