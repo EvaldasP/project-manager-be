@@ -1,4 +1,4 @@
-import { Roles, User } from '../../schemas/user.schema';
+import { Roles, User } from '../../users/user.schema';
 
 export const mockUser: User = {
   username: 'Test',

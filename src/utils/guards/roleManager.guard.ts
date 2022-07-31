@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { Roles } from 'src/schemas/user.schema';
+import { Roles } from 'src/users/user.schema';
 
 @Injectable()
 export class RoleManagerGuard implements CanActivate {

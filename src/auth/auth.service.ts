@@ -6,7 +6,7 @@ import { UsersService } from '../users/users.service';
 import { JwtPayload } from './dto/jwt-payload.interface';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { CreateUserDto } from '../users/create-user.dto';
-import { User } from '../schemas/user.schema';
+import { User } from '../users/user.schema';
 @Injectable()
 export class AuthService {
   constructor(
