@@ -17,14 +17,14 @@ export class ProjectService {
     const { name, projectManagerId } = createProjectDto;
 
     if (await this.findProject(name)) {
-      throw new ConflictException(`Project with ${name} already exists`);
+      throw new ConflictException(`Project with name ${name} already exists`);
     }
 
     const foundProjectManager = await this.usersService.getUserById(
       projectManagerId,
     );
 
-    const createdProject = new this.projectModel({
+    const createdProject = await this.projectModel.create({
       ...createProjectDto,
       tasks: [],
       workers: [],
@@ -36,10 +36,10 @@ export class ProjectService {
         : null,
     });
 
-    return createdProject.save();
+    return createdProject;
   }
 
   async findProject(name: string): Promise<Project> {
-    return this.projectModel.findOne({ name }).exec();
+    return this.projectModel.findOne({ name });
   }
 }
