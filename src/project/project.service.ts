@@ -24,8 +24,6 @@ export class ProjectService {
       projectManagerId,
     );
 
-    console.log(foundProjectManager);
-
     const createdProject = new this.projectModel({
       ...createProjectDto,
       tasks: [],
