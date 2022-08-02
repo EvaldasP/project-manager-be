@@ -4,6 +4,7 @@ import { getModelToken } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, Roles } from '../../users/user.schema';
 import { mockUser } from '../mocks/shared/user.mock';
+import { ConflictException } from '@nestjs/common';
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -34,25 +35,37 @@ describe('UsersService', () => {
     expect(service).toBeDefined();
   });
 
-  it('should insert a new user and return true', async () => {
-    jest.spyOn(model, 'create').mockImplementationOnce(() =>
-      Promise.resolve({
-        username: 'Test',
-        password: 'PasswordTest123',
-        role: Roles.Employee,
-      }),
-    );
+  describe('insertUser', () => {
+    it('should insert a new user and return true', async () => {
+      jest.spyOn(model, 'create').mockImplementationOnce(() =>
+        Promise.resolve({
+          username: 'Test',
+          password: 'PasswordTest123',
+          role: Roles.Employee,
+        }),
+      );
 
-    const newUser = await service.insertUser(mockUser);
+      const newUser = await service.insertUser(mockUser);
 
-    expect(newUser).toEqual(true);
+      expect(newUser).toEqual(true);
+    });
+
+    it('should throw error if user is already exist', () => {
+      jest.spyOn(service, 'getUser').mockResolvedValue(mockUser);
+
+      expect(service.insertUser(mockUser)).rejects.toThrow(
+        new ConflictException('Username already exists'),
+      );
+    });
   });
 
-  it('should return user', async () => {
-    jest.spyOn(model, 'findOne').mockReturnValue(mockUser as any);
+  describe('getUser', () => {
+    it('should return user', async () => {
+      jest.spyOn(model, 'findOne').mockResolvedValue(mockUser);
 
-    const foundUser = await service.getUser('Test');
+      const foundUser = await service.getUser('Test');
 
-    expect(foundUser).toEqual(mockUser);
+      expect(foundUser).toEqual(mockUser);
+    });
   });
 });
