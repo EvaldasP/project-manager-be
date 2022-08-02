@@ -6,7 +6,7 @@ import { ProjectServiceMock } from '../mocks/services/project.service.mock';
 
 describe('ProjectController', () => {
   let controller: ProjectController;
-  let projectService: ProjectService;
+  let projectService: ProjectServiceMock;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -15,11 +15,19 @@ describe('ProjectController', () => {
     }).compile();
 
     controller = module.get<ProjectController>(ProjectController);
-    projectService = module.get<ProjectService>(ProjectService);
+    projectService = module.get(ProjectService);
   });
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
+  });
+
+  describe(':id', () => {
+    it('should call projectService findProjectByid method', () => {
+      controller.getProject('1');
+
+      expect(projectService.findProjectById).toHaveBeenCalledWith('1');
+    });
   });
 
   describe('/create', () => {
