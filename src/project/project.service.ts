@@ -1,4 +1,8 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UsersService } from '../users/users.service';
@@ -41,5 +45,15 @@ export class ProjectService {
 
   async findProject(name: string): Promise<Project> {
     return this.projectModel.findOne({ name });
+  }
+
+  async findProjectById(_id: string): Promise<Project> {
+    const foundProject = await this.projectModel.findOne({ _id });
+
+    if (!foundProject) {
+      throw new NotFoundException('Project Not Found');
+    }
+
+    return foundProject;
   }
 }
