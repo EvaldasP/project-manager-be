@@ -1,4 +1,4 @@
-import { ConflictException } from '@nestjs/common';
+import { ConflictException, NotFoundException } from '@nestjs/common';
 import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { rejects } from 'assert';
@@ -49,6 +49,22 @@ describe('ProjectService', () => {
       const foundProject = await service.findProject('Test');
 
       expect(foundProject).toEqual(mockProject);
+    });
+  });
+
+  describe('findProjectById', () => {
+    it('should return project', async () => {
+      jest.spyOn(model, 'findOne').mockResolvedValue(mockProject);
+
+      const foundProject = await service.findProjectById('1');
+
+      expect(foundProject).toEqual(mockProject);
+    });
+
+    it('should throw error if Project not found', async () => {
+      expect(service.findProjectById('1')).rejects.toThrow(
+        new NotFoundException('Project not found'),
+      );
     });
   });
 

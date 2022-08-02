@@ -51,7 +51,7 @@ export class ProjectService {
     const foundProject = await this.projectModel.findOne({ _id });
 
     if (!foundProject) {
-      throw new NotFoundException('Project Not Found');
+      throw new NotFoundException('Project not found');
     }
 
     return foundProject;
